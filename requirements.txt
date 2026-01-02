@@ -1,0 +1,2 @@
+# Phase I: No production dependencies
+# Standard library only

@@ -1,55 +1,256 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version: 0.0.0 → 1.0.0
+Change Type: MAJOR - Initial ratification of global constitution
+Modified Principles:
+  - NEW: All principles created from scratch
+Added Sections:
+  - I. Spec-Driven Development Mandate
+  - II. Agent Behavior Rules
+  - III. Phase Governance
+  - IV. Technology Stack Constraints
+  - V. Clean Architecture Principles
+  - VI. Testing and Quality Standards
+  - VII. Stateless Design Principles
+  - VIII. Cloud-Native Readiness
+  - Governance
+Templates Requiring Updates:
+  ✅ .specify/templates/plan-template.md - Reviewed, Constitution Check section compatible
+  ✅ .specify/templates/spec-template.md - Reviewed, Requirements section compatible
+  ✅ .specify/templates/tasks-template.md - Reviewed, Task organization aligns with principles
+  ✅ .claude/commands/*.md - Reviewed, No agent-specific conflicts
+Follow-up TODOs:
+  - None - All placeholders filled
+-->
+
+# Evolution of Todo — Project Constitution
+
+## Preamble
+
+This Constitution governs all development work across the **Evolution of Todo** project, spanning Phase I through Phase V. It establishes the supreme rules and principles that all agents, processes, and contributors MUST follow. No code may be written, no feature may be added, and no architectural decision may be made without adherence to this Constitution.
+
+**Scope**: All phases, all features, all agents, all contributors.
+
+**Authority**: This Constitution supersedes all other practices, guidelines, or preferences. Compliance is mandatory and non-negotiable.
+
+---
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Spec-Driven Development Mandate (NON-NEGOTIABLE)
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+**Rule**: No agent or contributor may write production code without approved specifications and tasks.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+**Workflow Enforcement**:
+- All work MUST follow: **Constitution → Specs → Plan → Tasks → Implement**
+- Specifications MUST be approved before planning begins
+- Plans MUST be approved before tasks are generated
+- Tasks MUST be approved before implementation begins
+- Implementation MUST strictly follow the approved tasks
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**Prohibited Actions**:
+- Writing code without a corresponding approved task
+- Creating features not defined in specifications
+- Making architectural decisions not documented in plans
+- Deviating from approved specifications during implementation
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+**Rationale**: Spec-Driven Development ensures intentional, traceable, and controllable software evolution. It prevents scope creep, undocumented decisions, and architectural drift.
 
-### [PRINCIPLE_6_NAME]
+---
 
+### II. Agent Behavior Rules (NON-NEGOTIABLE)
 
-[PRINCIPLE__DESCRIPTION]
+**Human-Agent Division**:
+- Humans define requirements, approve specifications, and make final decisions
+- Agents generate specifications, plans, tasks, and implementations
+- No manual coding by humans unless explicitly required for debugging or hotfixes
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Agent Constraints**:
+- Agents MUST NOT invent features beyond the approved specification
+- Agents MUST NOT deviate from approved specifications without explicit user approval
+- Agents MUST NOT make architectural decisions not documented in the plan
+- Agents MUST NOT refactor or "improve" code outside the scope of current tasks
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+**Refinement Process**:
+- All refinements MUST occur at the specification level, not the code level
+- If implementation reveals issues, halt and propose specification updates
+- Specification updates require user approval before continuing implementation
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**Rationale**: Clear boundaries prevent agents from introducing unintended features, maintaining predictability and control.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+---
+
+### III. Phase Governance (NON-NEGOTIABLE)
+
+**Phase Isolation**:
+- Each phase (I through V) is strictly scoped by its specification
+- Phase boundaries MUST NOT be crossed during implementation
+- Future-phase features MUST NEVER leak into earlier phases
+- Each phase MUST be fully functional and deployable independently
+
+**Phase Evolution**:
+- Architecture MAY evolve across phases, but only through updated specifications and plans
+- Cross-phase dependencies MUST be explicitly documented in specifications
+- Phase transitions MUST be deliberate and approved
+
+**Phase Validation**:
+- Each phase MUST have measurable completion criteria
+- No phase may be considered complete without passing all acceptance tests
+- Phase completion MUST be validated before proceeding to the next phase
+
+**Rationale**: Phase isolation ensures incremental delivery, prevents scope creep, and allows for course correction between phases.
+
+---
+
+### IV. Technology Stack Constraints (MANDATORY)
+
+**Backend**:
+- Language: **Python 3.11+**
+- Web Framework: **FastAPI**
+- ORM: **SQLModel**
+- Database: **Neon DB (PostgreSQL-compatible)**
+- Agent Framework: **OpenAI Agents SDK** (when agents are required)
+- MCP: **Model Context Protocol** (for agent integrations)
+
+**Frontend** (Phase II and later):
+- Framework: **Next.js** (React-based)
+- Language: **TypeScript**
+- API Communication: REST or GraphQL as specified per phase
+
+**Infrastructure** (Phase IV and later):
+- Containerization: **Docker**
+- Orchestration: **Kubernetes**
+- Messaging: **Kafka** (when event-driven architecture is required)
+- Service Mesh: **Dapr** (for microservices communication)
+
+**Deviation Policy**:
+- Technology stack changes require constitutional amendment
+- Agents MUST NOT suggest or use alternative technologies without explicit approval
+- All dependencies MUST be justified in the implementation plan
+
+**Rationale**: Standardizing the technology stack ensures consistency, maintainability, and skill transferability across phases.
+
+---
+
+### V. Clean Architecture Principles (MANDATORY)
+
+**Separation of Concerns**:
+- Business logic MUST be separated from infrastructure concerns
+- Domain models MUST NOT depend on frameworks or external libraries
+- Dependencies MUST point inward (from infrastructure to domain)
+
+**Layering**:
+- **Domain Layer**: Core business entities and logic (framework-agnostic)
+- **Application Layer**: Use cases and application-specific business rules
+- **Infrastructure Layer**: External concerns (database, APIs, frameworks)
+- **Presentation Layer**: User interfaces and API endpoints
+
+**Dependency Rule**:
+- Outer layers MAY depend on inner layers
+- Inner layers MUST NEVER depend on outer layers
+- Use dependency inversion for required outward communication
+
+**Rationale**: Clean architecture ensures long-term maintainability, testability, and adaptability to changing requirements.
+
+---
+
+### VI. Testing and Quality Standards (MANDATORY)
+
+**Test-Driven Development**:
+- Tests MUST be written before implementation (Red-Green-Refactor cycle)
+- All tests MUST fail initially to validate they test real behavior
+- Implementation MUST make tests pass without changing test expectations
+
+**Test Coverage Requirements**:
+- **Unit Tests**: Required for all business logic and domain models
+- **Integration Tests**: Required for API endpoints, database interactions, and service integrations
+- **Contract Tests**: Required for all public APIs and inter-service communication
+- **End-to-End Tests**: Required for critical user journeys (per phase specification)
+
+**Quality Gates**:
+- No code may be merged without passing all tests
+- No code may be merged without meeting coverage thresholds (defined per phase)
+- Static analysis and linting MUST pass before merge
+- Security scans MUST pass before merge (when applicable)
+
+**Rationale**: Testing ensures correctness, prevents regressions, and documents expected behavior.
+
+---
+
+### VII. Stateless Design Principles (MANDATORY WHERE APPLICABLE)
+
+**Service Design**:
+- Services SHOULD be stateless wherever possible
+- Session state MUST be externalized (database, cache, or token-based)
+- Services MUST be horizontally scalable by design
+
+**State Management**:
+- Persistent state MUST reside in databases or managed storage
+- Temporary state MUST reside in caches (Redis, in-memory) with TTL
+- User session state MUST be token-based (JWT) or externalized
+
+**Exceptions**:
+- Stateful components MUST be explicitly justified in the plan
+- Stateful components MUST be isolated and clearly documented
+
+**Rationale**: Stateless services enable horizontal scaling, simplify deployment, and improve resilience.
+
+---
+
+### VIII. Cloud-Native Readiness (MANDATORY FOR PHASE III+)
+
+**12-Factor App Principles**:
+- Configuration via environment variables (no hardcoded secrets)
+- Logs to stdout/stderr (structured logging)
+- Processes are stateless and share-nothing
+- Services expose health checks and readiness probes
+
+**Observability**:
+- All services MUST emit structured logs
+- All services MUST expose metrics (Prometheus-compatible)
+- All services MUST support distributed tracing (when applicable)
+
+**Resilience**:
+- Services MUST handle transient failures gracefully (retries with backoff)
+- Services MUST implement circuit breakers for external dependencies
+- Services MUST degrade gracefully under load
+
+**Rationale**: Cloud-native design ensures scalability, reliability, and operational excellence in production environments.
+
+---
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+**Constitutional Authority**:
+- This Constitution is the supreme governing document for the Evolution of Todo project
+- All specifications, plans, tasks, and implementations MUST comply with this Constitution
+- Non-compliance is grounds for rejection and rework
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Amendment Procedure**:
+- Constitutional amendments require explicit approval from the project owner
+- Amendment proposals MUST include rationale and impact analysis
+- All amendments MUST be versioned using semantic versioning (MAJOR.MINOR.PATCH)
+
+**Versioning Policy**:
+- **MAJOR**: Backward-incompatible changes (principle removals, redefinitions, or policy reversals)
+- **MINOR**: Additions (new principles, new sections, expanded guidance)
+- **PATCH**: Clarifications, wording improvements, non-semantic refinements
+
+**Compliance Review**:
+- All specifications MUST include a Constitution Check section
+- All plans MUST verify compliance with constitutional principles
+- All pull requests MUST confirm adherence to this Constitution
+
+**Complexity Justification**:
+- Any deviation from constitutional principles MUST be explicitly justified
+- Justifications MUST be documented in the implementation plan
+- Simpler alternatives MUST be evaluated and rejected with reasoning
+
+**Conflict Resolution**:
+- In case of conflicts between this Constitution and other documents, the Constitution prevails
+- Ambiguities MUST be resolved by the project owner
+- Interpretations MUST be documented as amendments or ADRs
+
+---
+
+**Version**: 1.0.0 | **Ratified**: 2025-12-28 | **Last Amended**: 2025-12-28
