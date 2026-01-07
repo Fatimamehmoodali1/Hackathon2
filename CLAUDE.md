@@ -208,3 +208,15 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Active Technologies
+
+- Phase I (Console App): Python 3.11+, In-memory
+- **001-phase-2-todo-app: Python 3.11+ + FastAPI + SQLModel + Next.js (Phase II)**
+- Neon Serverless PostgreSQL (Phase II)
+- Better Auth (Phase II)
+
+## Recent Changes
+
+- 001-phase-2-todo-app: Added Python REST API + SQLModel + Next.js full-stack implementation
+

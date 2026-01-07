@@ -1,26 +1,20 @@
 <!--
 Sync Impact Report:
-Version: 0.0.0 → 1.0.0
-Change Type: MAJOR - Initial ratification of global constitution
+Version: 1.0.0 → 1.0.1
+Change Type: PATCH - Technology matrix ratification and policy clarification
 Modified Principles:
-  - NEW: All principles created from scratch
+  - IV. Technology Stack Constraints - Policy clarified (Phase II tech explicitly ratified)
 Added Sections:
-  - I. Spec-Driven Development Mandate
-  - II. Agent Behavior Rules
-  - III. Phase Governance
-  - IV. Technology Stack Constraints
-  - V. Clean Architecture Principles
-  - VI. Testing and Quality Standards
-  - VII. Stateless Design Principles
-  - VIII. Cloud-Native Readiness
-  - Governance
+  - None (existing content already aligned)
+Removed Sections:
+  - None
 Templates Requiring Updates:
-  ✅ .specify/templates/plan-template.md - Reviewed, Constitution Check section compatible
-  ✅ .specify/templates/spec-template.md - Reviewed, Requirements section compatible
-  ✅ .specify/templates/tasks-template.md - Reviewed, Task organization aligns with principles
-  ✅ .claude/commands/*.md - Reviewed, No agent-specific conflicts
+  ✅ .specify/templates/plan-template.md - Constitution Check section compatible
+  ✅ .specify/templates/spec-template.md - Requirements section compatible
+  ✅ .specify/templates/tasks-template.md - Task organization aligns with principles
+  ⚠ .specify/templates/commands/*.md - No command files exist (N/A)
 Follow-up TODOs:
-  - None - All placeholders filled
+  - None - All placeholders filled, technology matrix ratified as policy
 -->
 
 # Evolution of Todo — Project Constitution
@@ -104,31 +98,48 @@ This Constitution governs all development work across the **Evolution of Todo** 
 
 ### IV. Technology Stack Constraints (MANDATORY)
 
-**Backend**:
-- Language: **Python 3.11+**
-- Web Framework: **FastAPI**
-- ORM: **SQLModel**
-- Database: **Neon DB (PostgreSQL-compatible)**
-- Agent Framework: **OpenAI Agents SDK** (when agents are required)
-- MCP: **Model Context Protocol** (for agent integrations)
+**Phase I - Console Application (Current)**:
+- Architecture: In-memory console application
+- Language: Python 3.11+
+- No database required (in-memory state only)
+- No authentication required
+- No web frontend
 
-**Frontend** (Phase II and later):
-- Framework: **Next.js** (React-based)
-- Language: **TypeScript**
-- API Communication: REST or GraphQL as specified per phase
+**Phase II - Full-Stack Web Application**:
+- **Backend**:
+  - Language: Python 3.11+
+  - Web Framework: FastAPI
+  - ORM/Data Layer: SQLModel or equivalent
+  - API Style: REST
+- **Database**:
+  - Neon Serverless PostgreSQL
+- **Frontend**:
+  - Framework: Next.js (React-based)
+  - Language: TypeScript
+  - API Communication: REST
+- **Authentication**:
+  - Better Auth (signup/signin)
+- **Architecture**: Full-stack web application
 
-**Infrastructure** (Phase IV and later):
-- Containerization: **Docker**
-- Orchestration: **Kubernetes**
-- Messaging: **Kafka** (when event-driven architecture is required)
-- Service Mesh: **Dapr** (for microservices communication)
+**Phase III and Later**:
+- Advanced cloud infrastructure (Docker, Kubernetes)
+- Agent frameworks (OpenAI Agents SDK)
+- AI integrations and orchestration
+- Model Context Protocol (MCP) for agent integrations
+
+**Phase-Gated Technology Rules**:
+- Authentication frameworks are NOT allowed in Phase I
+- Web frontend frameworks are NOT allowed in Phase I
+- Database persistence (PostgreSQL) is NOT allowed in Phase I
+- AI or agent frameworks are NOT allowed until Phase III
+- Cross-phase technology usage requires constitutional amendment
 
 **Deviation Policy**:
 - Technology stack changes require constitutional amendment
 - Agents MUST NOT suggest or use alternative technologies without explicit approval
 - All dependencies MUST be justified in the implementation plan
 
-**Rationale**: Standardizing the technology stack ensures consistency, maintainability, and skill transferability across phases.
+**Rationale**: Standardizing the technology stack ensures consistency, maintainability, and skill transferability across phases while preserving phase isolation.
 
 ---
 
@@ -253,4 +264,4 @@ This Constitution governs all development work across the **Evolution of Todo** 
 
 ---
 
-**Version**: 1.0.0 | **Ratified**: 2025-12-28 | **Last Amended**: 2025-12-28
+**Version**: 1.0.1 | **Ratified**: 2025-12-28 | **Last Amended**: 2026-01-04

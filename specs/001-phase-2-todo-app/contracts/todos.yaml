@@ -1,0 +1,326 @@
+openapi: 3.0.3
+info:
+  title: Evolution of Todo - Todo API
+  version: 1.0.0
+  description: Todo CRUD endpoints for Phase II
+
+servers:
+  - url: /api/todos
+    description: Todo API base path
+
+security:
+  - cookieAuth: []
+
+paths:
+  /:
+    get:
+      summary: List all todos
+      description: Returns all todos belonging to the authenticated user
+      tags:
+        - Todos
+      responses:
+        '200':
+          description: List of todos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoListResponse'
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    post:
+      summary: Create a new todo
+      description: Creates a new todo for the authenticated user
+      tags:
+        - Todos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoCreateRequest'
+      responses:
+        '201':
+          description: Todo created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /{todoId}:
+    get:
+      summary: Get a specific todo
+      description: Returns a single todo by ID (must belong to authenticated user)
+      tags:
+        - Todos
+      parameters:
+        - name: todoId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Todo ID to retrieve
+      responses:
+        '200':
+          description: Todo details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoResponse'
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Not authorized to access this todo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Todo not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    put:
+      summary: Update a todo
+      description: Updates a todo's title (must belong to authenticated user)
+      tags:
+        - Todos
+      parameters:
+        - name: todoId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Todo ID to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoUpdateRequest'
+      responses:
+        '200':
+          description: Todo updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Not authorized to update this todo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Todo not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    delete:
+      summary: Delete a todo
+      description: Deletes a todo (must belong to authenticated user)
+      tags:
+        - Todos
+      parameters:
+        - name: todoId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Todo ID to delete
+      responses:
+        '204':
+          description: Todo deleted successfully (no content)
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Not authorized to delete this todo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Todo not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /{todoId}/toggle:
+    patch:
+      summary: Toggle todo completion
+      description: Toggles a todo's completion status (must belong to authenticated user)
+      tags:
+        - Todos
+      parameters:
+        - name: todoId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Todo ID to toggle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoToggleRequest'
+      responses:
+        '200':
+          description: Todo toggled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Not authorized to toggle this todo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Todo not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    TodoCreateRequest:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+          example: Buy groceries
+          description: The todo's task description
+
+    TodoUpdateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+          example: Buy groceries and milk
+          description: The updated todo title
+
+    TodoToggleRequest:
+      type: object
+      required:
+        - is_complete
+      properties:
+        is_complete:
+          type: boolean
+          example: true
+          description: The new completion status
+
+    TodoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        user_id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Buy groceries
+        is_complete:
+          type: boolean
+          example: false
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-04T10:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-04T10:30:00Z'
+
+    TodoListResponse:
+      type: object
+      properties:
+        todos:
+          type: array
+          items:
+            $ref: '#/components/schemas/TodoResponse'
+        count:
+          type: integer
+          example: 5
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: TODO_NOT_FOUND
+            message:
+              type: string
+              example: Todo not found
+
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: auth_session
