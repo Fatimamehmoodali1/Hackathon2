@@ -4,11 +4,19 @@ from typing import Generator
 from sqlmodel import SQLModel, create_engine, Session
 from .config import settings
 
-# Create engine - SQLite for development
+# Create engine - PostgreSQL/SQLite support
+connect_args = {}
+if "sqlite" in settings.database_url:
+    connect_args = {"check_same_thread": False}
+elif "postgresql" in settings.database_url:
+    # Neon PostgreSQL requires SSL
+    connect_args = {"sslmode": "require"}
+
 engine = create_engine(
     settings.database_url,
     echo=False,
-    connect_args={"check_same_thread": False} if "sqlite" in settings.database_url else {},
+    connect_args=connect_args,
+    pool_pre_ping=True,  # Verify connections before using
 )
 
 
