@@ -9,8 +9,9 @@ sqlmodel>=0.0.14
 # Authentication (Better Auth Python SDK)
 better-auth>=0.0.1b11
 
-# PostgreSQL driver for Neon
+# PostgreSQL driver for Neon (Vercel compatible)
 psycopg2-binary>=2.9.9
+psycopg[binary]>=3.1.18
 
 # Database migrations
 alembic>=1.13.1
