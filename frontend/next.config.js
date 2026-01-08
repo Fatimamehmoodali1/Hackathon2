@@ -8,6 +8,10 @@ const nextConfig = {
       },
     ];
   },
+  webpack: (config) => {
+    config.resolve.extensions = ['.tsx', '.ts', '.js', '.jsx', ...config.resolve.extensions];
+    return config;
+  },
 };
 
 module.exports = nextConfig;
